@@ -3,10 +3,9 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-
-const imgYoga = "/YogaGym.png";       
-const imgRunning = "/CorrerGym.png"; 
-const imgGym = "/HaciendoEjercicioGym.png";         
+const imgYoga = "/YogaGym.png";
+const imgRunning = "/CorrerGym.png";
+const imgGym = "/HaciendoEjercicioGym.png";
 
 const UnlimitedFitnessSection = () => (
   <section
@@ -22,35 +21,43 @@ const UnlimitedFitnessSection = () => (
     }}
   >
     <div className="limitless-grid">
-      {/* Texto columna izquierda */}
+      {/* Columna izquierda: texto */}
       <div className="limitless-content">
-        <h2 style={{
-          fontWeight: "bold",
-          fontSize: "2.25rem",
-          marginBottom: 12,
-          color: "#141414"
-        }}>
+        <h2
+          style={{
+            fontWeight: "bold",
+            fontSize: "2.25rem",
+            marginBottom: 12,
+            color: "#141414",
+          }}
+        >
           ¿Quieres una vida fitness sin límites?
         </h2>
-        <p style={{
-          fontSize: 17,
-          color: "#222",
-          marginBottom: 18,
-          opacity: 0.92,
-          maxWidth: 380
-        }}>
-          En GymInfinity, tu potencial no tiene fin. Entrena con los mejores, siente la energía del progreso y supera tus propios límites cada día. Aquí no solo fortaleces tu cuerpo, también tu mente.
+        <p
+          style={{
+            fontSize: 17,
+            color: "#222",
+            marginBottom: 18,
+            opacity: 0.92,
+            maxWidth: 480,
+          }}
+        >
+          En GymInfinity, tu potencial no tiene fin. Entrena con los mejores,
+          siente la energía del progreso y supera tus propios límites cada día.
+          Aquí no solo fortaleces tu cuerpo, también tu mente.
         </p>
-        <p style={{
-          fontSize: 16,
-          color: "#222",
-          opacity: 0.81,
-          marginBottom: 22
-        }}>
+        <p
+          style={{
+            fontSize: 16,
+            color: "#222",
+            opacity: 0.81,
+            marginBottom: 22,
+          }}
+        >
           ¡Inscríbete hoy en GymInfinity y comienza tu transformación!
         </p>
         <a
-          href="/inscripcion"
+          href="/"
           style={{
             display: "inline-block",
             background: "#F15A24",
@@ -67,139 +74,198 @@ const UnlimitedFitnessSection = () => (
           INSCRIBETE
         </a>
       </div>
-      {/* Composición de imágenes lado derecho */}
-      <div className="limitless-images">
-        {/* Principal yoga */}
+
+      {/* Columna derecha: fila de imágenes */}
+      <div className="limitless-images-row" >
+        <div className="right-small-images">
+          {/* Abajo: Gym */}
+          <motion.div
+            className="img-small"
+            initial={{ opacity: 0, x: 25 }}
+            animate={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.04 }}
+            transition={{ type: "spring", stiffness: 140, damping: 18, delay: 0.25 }}
+          >
+            <Image
+              src={imgGym}
+              alt="Fitness gym"
+              width={220}
+              height={140}
+              priority
+              style={{
+                borderRadius: "10px",
+                width: "100%",
+                height: "auto",
+                boxShadow: "0 18px 45px rgba(0,0,0,0.12)",
+                background: "#f6f6f6",
+                display: "block",
+              }}
+            />
+          </motion.div>
+        </div>
+           
+      
+        {/* Yoga: principal, más grande */}
         <motion.div
-          className="img-main"
-          initial={{ opacity: 0, scale: 0.94 }}
+          className="img-yoga"
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          whileHover={{ scale: 1.04 }}
+          whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 140, damping: 18 }}
         >
           <Image
             src={imgYoga}
             alt="Yoga bienestar"
-            width={260}
-            height={290}
-            priority
-            style={{
-              borderRadius: "22px",
-              width: "100%",
-              height: "auto",
-              boxShadow: "0 4px 30px 0 rgba(44,44,44,0.10)",
-              background: "#f7f7f7",
-              display: "block"
-            }}
-          />
-        </motion.div>
-        {/* Running arriba derecha */}
-        <motion.div
-          className="img-top"
-          initial={{ opacity: 0, x: 50, y: -25 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 140, damping: 18, delay: 0.3 }}
-        >
-          <Image
-            src={imgRunning}
-            alt="Running fitness"
-            width={130}
-            height={80}
+            width={420}
+            height={320}
             priority
             style={{
               borderRadius: "16px",
               width: "100%",
               height: "auto",
-              boxShadow: "0 2px 16px 0 rgba(241,90,36,0.10)",
-              background: "#f8f8f8",
-              display: "block"
+              boxShadow: "0 24px 60px rgba(0,0,0,0.12)",
+              background: "#f7f7f7",
+              display: "block",
             }}
           />
         </motion.div>
-        {/* Gym fuerza abajo izquierda */}
-        <motion.div
-          className="img-bottom"
-          initial={{ opacity: 0, x: -45, y: 35 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          whileHover={{ scale: 1.07 }}
-          transition={{ type: "spring", stiffness: 140, damping: 18, delay: 0.35 }}
-        >
-          <Image
-            src={imgGym}
-            alt="Fitness gym"
-            width={110}
-            height={60}
-            priority
-            style={{
-              borderRadius: "15px",
-              width: "100%",
-              height: "auto",
-              boxShadow: "0 2px 12px 0 rgba(44,44,44,0.10)",
-              background: "#f6f6f6",
-              display: "block"
-            }}
-          />
-        </motion.div>
+        <div className="right-small-images">
+          {/* Arriba: Running */}
+          <motion.div
+            className="img-small"
+            initial={{ opacity: 0, x: 25 }}
+            animate={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.04 }}
+            transition={{ type: "spring", stiffness: 140, damping: 18, delay: 0.15 }}
+          >
+            <Image
+              src={imgRunning}
+              alt="Running fitness"
+              width={220}
+              height={140}
+              priority
+              style={{
+                borderRadius: "10px",
+                width: "100%",
+                height: "auto",
+                boxShadow: "0 18px 45px rgba(241,90,36,0.18)",
+                background: "#f8f8f8",
+                display: "block",
+              }}
+            />
+          </motion.div>
+        </div>
       </div>
     </div>
+
     <style jsx>{`
-      .limitless-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        max-width: 1060px;
-        width: 100%;
-        align-items: center;
-      }
-      .limitless-content {
-        margin-bottom: 3.2rem;
-      }
-      .limitless-images {
-        position: relative;
-        min-height: 310px;
-        width: 370px;
-        height: 310px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .img-main {
-        position: absolute;
-        left: 60px;
-        top: 35px;
-        width: 260px;
-        z-index: 2;
-      }
-      .img-top {
-        position: absolute;
-        right: 0px;
-        top: -6px;
-        width: 130px;
-        z-index: 3;
-      }
-      .img-bottom {
-        position: absolute;
-        left: 10px;
-        bottom: -6px;
-        width: 110px;
-        z-index: 1;
-      }
-      @media (min-width: 900px) {
-        .limitless-grid {
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem;
-        }
-        .limitless-content {
-          margin-bottom: 0;
-          padding-left: 0.5rem;
-        }
-        .limitless-images {
-          margin-left: 0;
-        }
-      }
-    `}</style>
+  .limitless-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .limitless-content {
+    margin-bottom: 3.2rem;
+  }
+
+  /* Contenedor fila: yoga grande + las dos pequeñas encima */
+  .limitless-images-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.4rem;
+    position: relative; /* referencia para los absolutos */
+  }
+
+  .img-yoga {
+    flex-shrink: 0;
+    width: 420px;
+  }
+
+  /* estilo base de las pequeñas */
+  .img-small {
+    width: 220px;
+  }
+
+  /* PRIMER right-small-images: gym (abajo izquierda) */
+  .limitless-images-row > .right-small-images:first-of-type {
+    position: absolute;
+    bottom: 30px;   
+    left: 148px;  
+      z-index: 3; 
+  }
+
+  /* SEGUNDO right-small-images: running (arriba derecha) */
+  .limitless-images-row > .right-small-images:last-of-type {
+    position: absolute;
+    top: 30px;   
+    right: 150px; 
+    z-index: 3;
+  }
+
+  @media (min-width: 900px) {
+    .limitless-grid {
+      grid-template-columns: 1.1fr 1.2fr;
+      gap: 2rem;
+    }
+
+    .limitless-content {
+      margin-bottom: 0;
+      padding-left: 5.5rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .limitless-images-row {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .img-yoga {
+      width: 320px;
+       z-index: 1;
+    }
+
+    .img-small {
+      width: 150px;
+    }
+
+    .limitless-images-row > .right-small-images:first-of-type {
+      bottom: -16px;
+      left: -24px;
+    }
+
+    .limitless-images-row > .right-small-images:last-of-type {
+      top: -16px;
+      right: -24px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .img-yoga {
+      width: 280px;
+    }
+
+    .img-small {
+      width: 190px;
+    }
+
+    .limitless-images-row > .right-small-images:first-of-type {
+      bottom: -14px;
+      left: -18px;
+    }
+
+    .limitless-images-row > .right-small-images:last-of-type {
+      top: -14px;
+      right: -18px;
+    }
+  }
+`}</style>
+
   </section>
 );
 
