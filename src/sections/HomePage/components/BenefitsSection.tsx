@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -23,82 +24,22 @@ const features = [
   },
 ];
 
-const CheckIcon = ({ isHovered = false }) => (
-  <motion.span
-    initial={{ scale: 1, backgroundColor: "#F15A24" }}
-    whileHover={{ 
-      scale: 1.1, 
-      backgroundColor: "#e04a1a",
-      boxShadow: "0 4px 12px rgba(241, 90, 36, 0.4)"
-    }}
-    animate={isHovered ? { 
-      scale: 1.05,
-      backgroundColor: "#e04a1a"
-    } : { 
-      scale: 1,
-      backgroundColor: "#F15A24"
-    }}
-    transition={{ type: "spring", stiffness: 300, damping: 15 }}
-    style={{
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      width: 19,
-      height: 19,
-      borderRadius: "50%",
-      marginRight: 14,
-      flexShrink: 0,
-    }}
-  >
-    <motion.svg 
-      width="13" 
-      height="11" 
-      viewBox="0 0 13 11" 
-      fill="none"
-      initial={{ pathLength: 0 }}
-      whileHover={{ pathLength: 1 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-    >
-      <motion.path
-        d="M11.291 1.657L4.812 8.136 2.003 5.327"
-        stroke="#fff"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        initial={{ pathLength: 0 }}
-        whileHover={{ pathLength: 1 }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
-      />
-    </motion.svg>
-  </motion.span>
-);
-
 const AnimatedCheckIcon = () => (
   <motion.span
     initial={{ scale: 1, backgroundColor: "#F15A24" }}
-    whileHover={{ 
+    whileHover={{
       scale: 1.15,
       backgroundColor: "#ff6b35",
-      rotate: [0, -5, 5, 0]
+      rotate: [0, -5, 5, 0],
     }}
     whileTap={{ scale: 0.9 }}
-    transition={{ 
-      type: "spring", 
-      stiffness: 400, 
+    transition={{
+      type: "spring",
+      stiffness: 400,
       damping: 17,
-      rotate: { duration: 0.3 }
+      rotate: { duration: 0.3 },
     }}
-    style={{
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      width: 40,
-      height: 19,
-      borderRadius: "50%",
-      marginRight: 14,
-      flexShrink: 0,
-      cursor: "pointer",
-    }}
+    className="inline-flex items-center justify-center w-[40px] h-[19px] rounded-full mr-3 cursor-pointer"
   >
     <motion.svg
       width="13"
@@ -121,84 +62,69 @@ const AnimatedCheckIcon = () => (
 );
 
 const BenefictsSection = () => (
-  <section
-    style={{
-      width: "100%",
-      background: "#fff",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      minHeight: "60vh",
-      padding: "2.5rem",
-      boxSizing: "border-box",
-    }}
-  >
-    <div className="choose-grid">
-      {/* Imagen con animación */}
-      <div className="choose-img">
+  <section className="w-full bg-white flex items-center justify-center min-h-[60vh] p-10">
+    <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-10 max-w-[1050px] w-full items-center">
+      
+      {/* Imagen */}
+      <div className="justify-self-center min-w-[220px] max-w-[320px] w-full">
         <motion.div
-          initial={{ scale: 1, boxShadow: "0 2px 12px 0 rgba(0,0,0,0.12)", filter: "brightness(1)" }}
+          initial={{
+            scale: 1,
+            boxShadow: "0 2px 12px rgba(0,0,0,0.12)",
+            filter: "brightness(1)",
+          }}
           whileHover={{
             scale: 1.055,
             filter: "brightness(1.08)",
-            boxShadow: "0 8px 36px 0 rgba(241,90,36,0.12)"
+            boxShadow: "0 8px 36px rgba(241,90,36,0.12)",
           }}
           whileTap={{ scale: 0.98 }}
           transition={{ type: "spring", stiffness: 180, damping: 17 }}
-          style={{ borderRadius: "18px" }}
+          className="rounded-[18px]"
         >
           <Image
             src={BenefictsImage}
             alt="Entrenadora fitness con alumnos"
             width={320}
             height={380}
-            style={{
-              width: "100%",
-              height: "auto",
-              borderRadius: "18px",
-              objectFit: "cover",
-              maxWidth: "320px",
-              transition: "box-shadow 0.25s",
-            }}
+            className="w-full h-auto rounded-[18px] object-cover max-w-[320px] transition-shadow duration-200"
             priority
           />
         </motion.div>
       </div>
-      
+
       {/* Texto */}
-      <div className="choose-content">
-        <h2 style={{ fontSize: "2.2rem", fontWeight: "bold", marginBottom: 16 }}>
+      <div className="px-2 lg:pr-8">
+        <h2 className="text-[2.2rem] font-bold mb-4 text-gray-900">
           ¿Por qué elegir FitLife Studio?
         </h2>
-        <p
-          style={{
-            color: "#222",
-            fontSize: 16,
-            marginBottom: 30,
-            opacity: 0.87,
-          }}
-        >
+
+        <p className="text-gray-800 text-[16px] opacity-90 mb-7">
           Descubra los beneficios que nos distinguen e impulse su viaje de fitness.
         </p>
 
-        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        <ul className="list-none m-0 p-0">
           {features.map((item, i) => (
-            <motion.li 
-              key={i} 
-              style={{ display: "flex", alignItems: "flex-start", marginBottom: 28 }}
+            <motion.li
+              key={i}
+              className="flex items-start mb-7"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               whileHover={{ x: 5 }}
             >
               <AnimatedCheckIcon />
+
               <div>
-                <div style={{ fontWeight: 600, fontSize: "1.08rem", marginBottom: 3, color: "#222" }}>
+                <div className="font-semibold text-[1.08rem] mb-1 text-gray-900">
                   {item.title.split("\n").map((t, idx) => (
-                    <span key={idx} style={{ display: "block" }}>{t}</span>
+                    <span key={idx} className="block">
+                      {t}
+                    </span>
                   ))}
                 </div>
-                <div style={{ fontSize: 15, color: "#444", opacity: 0.88, marginRight: 18 }}>
+
+                <div className="text-[15px] text-gray-700 opacity-90 mr-4">
                   {item.description}
                 </div>
               </div>
@@ -207,37 +133,6 @@ const BenefictsSection = () => (
         </ul>
       </div>
     </div>
-    <style jsx>{`
-      .choose-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2.4rem;
-        max-width: 1050px;
-        width: 100%;
-        align-items: center;
-      }
-      .choose-img {
-        justify-self: center;
-        min-width: 220px; 
-        max-width: 320px;
-        width: 100%;
-      }
-      .choose-content {
-        padding: 0 0.7rem;
-      }
-      @media (min-width: 900px) {
-        .choose-grid {
-          grid-template-columns: 420px 1fr; 
-          gap: 1rem; 
-        }
-        .choose-img {
-          max-width: 320px; 
-        }
-        .choose-content {
-          padding-right: 2.2rem;
-        }
-      }
-    `}</style>
   </section>
 );
 

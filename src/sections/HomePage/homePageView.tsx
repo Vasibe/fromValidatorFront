@@ -5,6 +5,7 @@ import WelcomeSection from "./components/WelcomeSection";
 import BenefictsSection from "./components/BenefitsSection";
 import ServicePremiumSection from "./components/ServicePremiumSection";
 import UnlimitedFitnessSection from "./components/UnlimitedFitnessSection";
+import HeroSection from "./components/HeroSection";
 
 
 export function HomePageView() {
@@ -22,6 +23,7 @@ const profileButton = { nombre: "Mi perfil", href: "/" };
       <BenefictsSection />
       <ServicePremiumSection />
       <UnlimitedFitnessSection />
+      <HeroSection />
     </div>
   );
 }
