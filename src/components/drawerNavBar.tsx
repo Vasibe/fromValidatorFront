@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image"; // ← Importar Image de Next.js
+import Image from "next/image"; 
 
 interface LinkItem {
   nombre: string;
