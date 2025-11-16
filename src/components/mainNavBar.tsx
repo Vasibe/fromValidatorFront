@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MobileDrawer } from "./drawerNavBar";
-import Image from "next/image"; // ← Importar Image
+import Image from "next/image"; 
 
 interface LinkItem {
   nombre: string;
