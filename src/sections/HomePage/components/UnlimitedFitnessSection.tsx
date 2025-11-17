@@ -39,7 +39,7 @@ const UnlimitedFitnessSection = () => (
         </p>
 
         <a
-          href="/"
+          href="/FormRegister"
           className="
             inline-block bg-[#F15A24] text-white 
             font-bold text-[16.5px] 

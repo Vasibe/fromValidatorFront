@@ -59,7 +59,7 @@ const WelcomeSection = () => (
           transition={{ delay: 0.4, duration: 0.4 }}
           whileHover={{ scale: 1.08, backgroundColor: "#cd4311" }}
           whileTap={{ scale: 0.95 }}
-          href="/"
+          href="/FormRegister"
           className="
             inline-block bg-[#F15A24] text-white 
             px-10 py-4 rounded-lg font-bold 
