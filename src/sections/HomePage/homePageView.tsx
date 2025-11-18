@@ -30,7 +30,7 @@ export function HomePageView() {
         year={2025}
         mainLinks={[
           { label: "About", href: "/about" },
-          { label: "Services", href: "/services" },
+          { label: "Services", href: "/UserRegister"},
           { label: "Contact", href: "/contact" },
         ]}
         legalLinks={[
