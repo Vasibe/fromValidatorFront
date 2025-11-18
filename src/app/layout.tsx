@@ -1,3 +1,4 @@
+import { Toaster } from 'sonner';
 import './globals.css';
 export const metadata = {
   title: 'GymFinity',
@@ -14,7 +15,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body>
+      <body suppressHydrationWarning={true}>
+      <Toaster richColors position="top-right" />
         {children}
       </body>
     </html>
