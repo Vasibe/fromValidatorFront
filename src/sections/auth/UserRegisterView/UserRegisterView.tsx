@@ -8,8 +8,11 @@ import { useCreateApi } from "@/src/api/user/userCreatorApi";
 import EmailAutomata from "./components/automatas/EmailAutomata";
 import UserAutomata from "./components/automatas/UserAutomata";
 import PasswordAutomata from "./components/automatas/PasswordAutomata";
+import { useRouter } from "next/navigation";
 
 export default function UseRegisterView() {
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
   const { createUser } = useCreateApi();
 
   const [form, setForm] = useState({
@@ -33,6 +36,10 @@ export default function UseRegisterView() {
 
       if (success) {
         toast.success("Usuario creado correctamente");
+
+        setTimeout(() => {
+          router.push("/Login");
+        }, 800);
       } else {
         toast.error("No se pudo crear el usuario");
       }
@@ -56,6 +63,8 @@ export default function UseRegisterView() {
             />
             <UserPassword
               value={form.password}
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
               onChange={(value) => handleChange("password", value)}
             />
 
@@ -65,6 +74,13 @@ export default function UseRegisterView() {
             >
               Crear usuario
             </button>
+
+            <a
+              href="/Login"
+              className="text-blue-600 text-sm mt-2 hover:underline text-center"
+            >
+              ¿Ya tienes cuenta? Iniciar sesión
+            </a>
           </div>
         </form>
         {form.userName && <UserAutomata value={form.userName} />}
