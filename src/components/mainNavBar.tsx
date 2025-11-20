@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MobileDrawer } from "./drawerNavBar";
-import Image from "next/image"; 
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/src/hooks/useAuth";
 
 interface LinkItem {
   nombre: string;
@@ -24,16 +26,20 @@ interface NavBarProps {
   onProfileClick?: () => void;
 }
 
-const NavBar = ({ 
-  links = [], 
+const NavBar = ({
+  links = [],
   profileButton = { nombre: "Mi perfil", href: "/profile" },
   brandName = "Gymfinity",
   logoColor = "#F15A24",
   onLinkClick,
-  onProfileClick
+  onProfileClick,
 }: NavBarProps) => {
   const [isMobile, setIsMobile] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const { user, logout } = useAuth();
+  const router = useRouter();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -41,9 +47,9 @@ const NavBar = ({
     };
 
     checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    
-    return () => window.removeEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   return (
@@ -58,32 +64,32 @@ const NavBar = ({
           boxShadow: "0 2px 4px rgba(0,0,0,0.03)",
           padding: "1rem 2rem",
           boxSizing: "border-box",
-          overflow: "hidden"
         }}
       >
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? 'auto 1fr auto' : '1fr auto 1fr',
-          alignItems: 'center',
-          width: '100%',
-          maxWidth: '1200px',
-          margin: '0 auto',
-          gap: '1rem'
-        }}>
-          
-          {/* Logo y nombre  */}
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center',
-            justifyContent: isMobile ? 'flex-start' : 'flex-start',
-            minWidth: 0
-          }}>
-            {/* Logo PNG con animación */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "auto 1fr auto" : "1fr auto 1fr",
+            alignItems: "center",
+            width: "100%",
+            maxWidth: "1200px",
+            margin: "0 auto",
+            gap: "1rem",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: isMobile ? "flex-start" : "flex-start",
+              minWidth: 0,
+            }}
+          >
             <motion.div
-              whileHover={{ 
-                scale: 1.15, 
+              whileHover={{
+                scale: 1.15,
                 rotate: 5,
-                transition: { type: "spring", stiffness: 400 }
+                transition: { type: "spring", stiffness: 400 },
               }}
             >
               <Image
@@ -91,39 +97,37 @@ const NavBar = ({
                 alt={`Logo ${brandName}`}
                 width={36}
                 height={36}
-                style={{
-                  objectFit: "contain"
-                }}
+                style={{ objectFit: "contain" }}
               />
             </motion.div>
-            
 
-            <motion.span 
+            <motion.span
               style={{
-                marginLeft: '8px',
-                fontWeight: "bold", 
-                fontSize: "20px", 
+                marginLeft: "8px",
+                fontWeight: "bold",
+                fontSize: "20px",
                 color: "#222",
-                whiteSpace: 'nowrap'
+                whiteSpace: "nowrap",
               }}
-              whileHover={{ 
+              whileHover={{
                 color: logoColor,
-                transition: { duration: 0.2 }
+                transition: { duration: 0.2 },
               }}
             >
               {brandName}
             </motion.span>
           </div>
 
-          {/* Links dinámicos - Solo en desktop */}
           {!isMobile && (
-            <div style={{ 
-              display: "flex", 
-              alignItems: "center", 
-              gap: "clamp(1rem, 2vw, 2rem)",
-              justifyContent: 'center',
-              flexWrap: 'wrap'
-            }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "clamp(1rem, 2vw, 2rem)",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
               {links.map((link, idx) => (
                 <motion.a
                   key={link.nombre + idx}
@@ -142,7 +146,7 @@ const NavBar = ({
                     fontWeight: link.active ? "bold" : "normal",
                     fontSize: "clamp(14px, 1.5vw, 16px)",
                     cursor: "pointer",
-                    whiteSpace: 'nowrap'
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {link.nombre}
@@ -151,12 +155,14 @@ const NavBar = ({
             </div>
           )}
 
-          {/* Botón perfil o menú hamburguesa */}
-          <div style={{ 
-            display: 'flex',
-            justifyContent: 'flex-end',
-            minWidth: 0
-          }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              minWidth: 0,
+              position: "relative",
+            }}
+          >
             {isMobile ? (
               <motion.button
                 onClick={() => setDrawerOpen(true)}
@@ -169,60 +175,120 @@ const NavBar = ({
                   padding: "0.5rem",
                   display: "flex",
                   flexDirection: "column",
-                  gap: "4px"
+                  gap: "4px",
                 }}
               >
-                <span style={{
-                  width: "24px",
-                  height: "2px",
-                  backgroundColor: "#222",
-                  display: "block"
-                }} />
-                <span style={{
-                  width: "24px",
-                  height: "2px",
-                  backgroundColor: "#222",
-                  display: "block"
-                }} />
-                <span style={{
-                  width: "24px",
-                  height: "2px",
-                  backgroundColor: "#222",
-                  display: "block"
-                }} />
+                <span
+                  style={{ width: "24px", height: "2px", background: "#222" }}
+                />
+                <span
+                  style={{ width: "24px", height: "2px", background: "#222" }}
+                />
+                <span
+                  style={{ width: "24px", height: "2px", background: "#222" }}
+                />
               </motion.button>
             ) : (
-              <motion.a
-                href={profileButton.href}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={(e) => {
-                  if (onProfileClick) {
-                    e.preventDefault();
-                    onProfileClick();
-                  }
-                }}
-                style={{
-                  backgroundColor: "#F15A24",
-                  color: "#fff",
-                  border: "none",
-                  padding: "0.5rem 1.5rem",
-                  borderRadius: 8,
-                  fontWeight: "bold",
-                  fontSize: "clamp(14px, 1.5vw, 15px)",
-                  textDecoration: "none",
-                  display: "inline-block",
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                {profileButton.nombre}
-              </motion.a>
+              <>
+                {!user && (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                    }}
+                  >
+                    {/* BOTÓN INICIAR SESIÓN */}
+                    <motion.a
+                      href="/Login"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      style={{
+                        backgroundColor: "#F15A24",
+                        color: "#fff",
+                        border: "none",
+                        padding: "0.5rem 1.5rem",
+                        borderRadius: 8,
+                        fontWeight: "bold",
+                        fontSize: "clamp(14px, 1.5vw, 15px)",
+                        textDecoration: "none",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      Iniciar sesión
+                    </motion.a>
+
+                    <motion.button
+                      onClick={() => router.push("/UserRegister")}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      style={{
+                        backgroundColor: "#222",
+                        color: "#fff",
+                        border: "none",
+                        padding: "0.5rem 1.5rem",
+                        borderRadius: 8,
+                        fontWeight: "bold",
+                        cursor: "pointer",
+                        fontSize: "clamp(14px, 1.5vw, 15px)",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      Registrarse
+                    </motion.button>
+                  </div>
+                )}
+
+                {user && (
+                  <div style={{ position: "relative" }}>
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      style={{
+                        backgroundColor: "#F15A24",
+                        color: "#fff",
+                        border: "none",
+                        padding: "0.5rem 1.5rem",
+                        borderRadius: 8,
+                        fontWeight: "bold",
+                        cursor: "pointer",
+                        fontSize: "clamp(14px, 1.5vw, 15px)",
+                      }}
+                    >
+                      {user.userName}
+                    </motion.button>
+
+                    {dropdownOpen && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "110%",
+                          right: 0,
+                          background: "white",
+                          borderRadius: 8,
+                          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                          padding: "0.5rem 1rem",
+                          cursor: "pointer",
+                          minWidth: "140px",
+                          zIndex: 9999,
+                        }}
+                        onClick={() => {
+                          logout();
+                          router.push("/Login");
+                        }}
+                      >
+                        <span className="text-gray-700">Cerrar sesión</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Drawer */}
       <MobileDrawer
         links={links}
         profileButton={profileButton}
